@@ -1,6 +1,8 @@
 spring:
   application:
     name: batchservice
+  config:
+    import: optional:file:env/.env[.properties]
 
   datasource:
     driver-class-name: org.postgresql.Driver
@@ -11,3 +13,4 @@ spring:
 jasypt:
   encryptor:
     bean: jasyptStringEncryptor
+    password: ${JASYPT_ENCRYPTOR_PASSWORD}
