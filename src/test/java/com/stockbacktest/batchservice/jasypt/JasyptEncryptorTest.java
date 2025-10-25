@@ -5,7 +5,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import com.stockbacktest.batchservice.config.JasyptConfig;
 import org.jasypt.encryption.StringEncryptor;
-import org.junit.jupiter.api.Assertions;
+import org.jasypt.exceptions.EncryptionOperationNotPossibleException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -36,5 +36,16 @@ class JasyptEncryptorTest {
 
     assertThat(decrypted)
         .isEqualTo(plainText);
+  }
+
+  @Test
+  @DisplayName("실패 - 잘못된 암호문 복호화 시 예외 발생")
+  void decrypt_InvalidCipher_Fail() {
+    // given
+    String invalidCipher = "invalid-encrypted-text";
+
+    // when & then
+    assertThatThrownBy(() -> stringEncryptor.decrypt(invalidCipher))
+        .isInstanceOf(EncryptionOperationNotPossibleException.class);
   }
 }
