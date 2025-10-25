@@ -1,5 +1,8 @@
 package com.stockbacktest.batchservice.jasypt;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+
 import com.stockbacktest.batchservice.config.JasyptConfig;
 import org.jasypt.encryption.StringEncryptor;
 import org.junit.jupiter.api.Assertions;
@@ -18,14 +21,20 @@ class JasyptEncryptorTest {
   private StringEncryptor stringEncryptor;
 
   @Test
-  @DisplayName("Encrypt Test")
-  void encryptSamples() {
+  @DisplayName("성공 - 암호화 및 복호화 성공")
+  void encryptAndDecrypt_Success() {
+    // given
     String plainText = "ThisIsTestSecretKey";
-    String encryptedText = stringEncryptor.encrypt(plainText);
-    String decryptedText = stringEncryptor.decrypt(encryptedText);
 
-    System.out.println("Encrypted = ENC(" + encryptedText + ")");
+    // when
+    String encrypted = stringEncryptor.encrypt(plainText);
+    String decrypted = stringEncryptor.decrypt(encrypted);
 
-    Assertions.assertEquals(plainText, decryptedText);
+    // then
+    assertThat(encrypted)
+        .isNotEqualTo(plainText);
+
+    assertThat(decrypted)
+        .isEqualTo(plainText);
   }
 }
