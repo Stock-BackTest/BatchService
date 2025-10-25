@@ -1,5 +1,6 @@
 package com.stockbacktest.batchservice.config;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 
 import org.jasypt.encryption.StringEncryptor;
@@ -11,6 +12,9 @@ import org.springframework.context.annotation.Primary;
 @Configuration
 public class JasyptConfig {
 
+  @Value("${jasypt.encryptor.password}")
+  private String password;
+
   @Bean("jasyptStringEncryptor")
   @Primary
   public StringEncryptor stringEncryptor() {
@@ -21,7 +25,7 @@ public class JasyptConfig {
     SimpleStringPBEConfig config = new SimpleStringPBEConfig();
 
     //암호화 키: 환경변수로 주입
-    config.setPassword(System.getenv("JASYPT_ENCRYPTOR_PASSWORD"));
+    config.setPassword(password);
 
     //암호화 알고리즘
     config.setAlgorithm("PBEWithHmacSHA256AndAES_256");
