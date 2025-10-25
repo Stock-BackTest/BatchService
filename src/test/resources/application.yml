@@ -10,3 +10,7 @@ spring:
       initialize-schema: never
     job:
       enabled: false
+
+jasypt:
+  encryptor:
+    password: "test-secret-password"
