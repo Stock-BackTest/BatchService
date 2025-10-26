@@ -10,6 +10,10 @@ spring:
     username: ENC(Mly2cUzmNOAB/4LKAni6cLWYNFRR03b8mr0pdLUP4/SBMZFUE5NH3+UXc6mKZK3Z)
     password: ENC(IDji83pALykqk1zG6LlR0bw76HpwJxPM+F8vv3CTI/2ZXr24W5UJTcehG1dybw3b)
 
+  batch:
+    jdbc:
+      initialize-schema: always
+
 jasypt:
   encryptor:
     bean: jasyptStringEncryptor
