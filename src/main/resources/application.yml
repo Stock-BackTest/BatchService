@@ -6,9 +6,9 @@ spring:
 
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: ENC(V9sq0zB9HjorvYPyKFIeahK1hV/xmTFskZ4ObeVEybcYFENh0YF3p4oxnq1sSUQRW2YSptC1Ket94HLkm4gNhkeX7gp2nQQrm/GH00eUW1HKg1ze0UbJ6Ao3yPTc+iH3bT6qpJUXVHIcAuo4Dnjc2w==)
-    username: ENC(Mly2cUzmNOAB/4LKAni6cLWYNFRR03b8mr0pdLUP4/SBMZFUE5NH3+UXc6mKZK3Z)
-    password: ENC(IDji83pALykqk1zG6LlR0bw76HpwJxPM+F8vv3CTI/2ZXr24W5UJTcehG1dybw3b)
+    url: ENC(bzF57UX9J+VNuenmvvRvXXnkIXR/fRQoBQk6lUANP5EXyjjHWALPfLcMU9OWjQE4gYH3BsenQuWp60pDHusTNWxFVy+9Keg4X/UWP1XW1ZoQKSe85KMQzbN2a3oGfphMLlunbUlwrP+GhBAdFMaXJg==)
+    username: ENC(c0hvAR8cVurLw3xqQu3+24Ysv+hcYhgSkhAnll+KvVduK0f3S0IYjxMXptMAYa0/)
+    password: ENC(z8HenqC21c3wyOQbKxc3mpxZzpGmu201NReq0VaSkbKrGFPV0NYEZcpl7H6mUbbT)
 
   batch:
     jdbc:
