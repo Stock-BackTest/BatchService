@@ -1,18 +1,17 @@
 package com.stockbacktest.batchservice.service;
 
+import static org.springframework.http.MediaType.APPLICATION_JSON;
+
 import com.stockbacktest.batchservice.dto.EtfDailyPriceApiResponseDto;
 import com.stockbacktest.batchservice.dto.EtfDailyPriceDto;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpStatusCode;
-import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestClient;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
-
-import static org.springframework.http.MediaType.APPLICATION_JSON;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestClient;
 
 /**
  * ETF 일별 시세 정보
