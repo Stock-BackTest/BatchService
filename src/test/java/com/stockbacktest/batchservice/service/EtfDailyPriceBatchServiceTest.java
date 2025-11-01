@@ -232,6 +232,6 @@ class EtfDailyPriceBatchServiceTest {
     List<EtfDailyPriceDto> result = service.getDailyEtfsPrice(LocalDate.of(2020, 4, 14));
 
     assertThat(result.size()).isEqualTo(2);
-    assertThat(result.getFirst().isinCode()).isEqualTo("253150");
+    assertThat(result.getFirst().isinShortCode()).isEqualTo("253150");
   }
 }

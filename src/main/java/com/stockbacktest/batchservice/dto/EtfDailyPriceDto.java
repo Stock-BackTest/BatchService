@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public record EtfDailyPriceDto(
     @JsonProperty("BAS_DD") String baseDate, // 기준일자
-    @JsonProperty("ISU_CD") String isinCode, // 종목코드
+    @JsonProperty("ISU_CD") String isinShortCode, // 종목 6자리단축코드
     @JsonProperty("ISU_NM") String itemsName, // 종목명
     @JsonProperty("TDD_CLSPRC") String closePrice, // 종가
     @JsonProperty("CMPPREVDD_PRC") String diffFromPrevPrice, // 대비
