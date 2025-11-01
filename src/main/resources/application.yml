@@ -1,3 +1,20 @@
 spring:
   application:
     name: batchservice
+  config:
+    import: optional:file:env/.env[.properties]
+
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: ENC(bzF57UX9J+VNuenmvvRvXXnkIXR/fRQoBQk6lUANP5EXyjjHWALPfLcMU9OWjQE4gYH3BsenQuWp60pDHusTNWxFVy+9Keg4X/UWP1XW1ZoQKSe85KMQzbN2a3oGfphMLlunbUlwrP+GhBAdFMaXJg==)
+    username: ENC(c0hvAR8cVurLw3xqQu3+24Ysv+hcYhgSkhAnll+KvVduK0f3S0IYjxMXptMAYa0/)
+    password: ENC(z8HenqC21c3wyOQbKxc3mpxZzpGmu201NReq0VaSkbKrGFPV0NYEZcpl7H6mUbbT)
+
+  batch:
+    jdbc:
+      initialize-schema: always
+
+jasypt:
+  encryptor:
+    bean: jasyptStringEncryptor
+    password: ${JASYPT_ENCRYPTOR_PASSWORD}
