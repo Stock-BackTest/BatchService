@@ -18,3 +18,7 @@ jasypt:
   encryptor:
     bean: jasyptStringEncryptor
     password: ${JASYPT_ENCRYPTOR_PASSWORD}
+
+krx:
+  apiUrl: https://data-dbg.krx.co.kr/svc/apis/etp/etf_bydd_trd
+  apikey: ENC(QBd0Ut8OGvI/sH7b8Br0CejdiVXpXf1zolZC1unFB6acjcu4ldOun15nJjCwwDlVFSPoWtevLIig3P246cemqI/OCaMVYPChRWByThB2hbY=)
