@@ -17,3 +17,7 @@ spring:
 jasypt:
   encryptor:
     password: "test-secret-password"
+
+krx:
+  apiUrl: initial-test-krx-url
+  apikey: initial-test-api-key
