@@ -1,0 +1,27 @@
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+  namespace="com.stockbacktest.batchservice.job.etfdailypriceapi.domain.mapper.EtfDailyPriceMapper">
+
+  <insert id="insertDailyPrice" parameterType="java.util.List">
+    INSERT INTO stockbacktest.etf_daily_price (
+    base_date, isin_code, items_name, close_price, diff_from_prev_price, fluctuation_rate,
+    nav, open_price, high_price, low_price, accumulated_volume, accumulated_trade_value,
+    market_cap, total_net_asset, listed_shares, index_name, index_close,
+    index_diff_from_prev, index_fluctuation_rate
+    ) VALUES
+    <foreach collection="etfPrices" item="item" separator=",">
+      (
+      #{item.baseDate}, #{item.isinCode}, #{item.itemsName}, #{item.closePrice},
+      #{item.diffFromPrevPrice}, #{item.fluctuationRate}, #{item.nav},
+      #{item.openPrice}, #{item.highPrice}, #{item.lowPrice},
+      #{item.accumulatedVolume}, #{item.accumulatedTradeValue},
+      #{item.marketCap}, #{item.totalNetAsset}, #{item.listedShares},
+      #{item.indexName}, #{item.indexClose}, #{item.indexDiffFromPrev},
+      #{item.indexFluctuationRate}
+      )
+    </foreach>
+  </insert>
+
+</mapper>
