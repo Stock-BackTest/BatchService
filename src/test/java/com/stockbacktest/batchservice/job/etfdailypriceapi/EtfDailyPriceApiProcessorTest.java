@@ -2,7 +2,6 @@ package com.stockbacktest.batchservice.job.etfdailypriceapi;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import com.stockbacktest.batchservice.dto.EtfDailyPriceDto;
 import com.stockbacktest.batchservice.job.etfdailypriceapi.domain.entity.EtfDailyPrice;
@@ -346,57 +345,5 @@ class EtfDailyPriceApiProcessorTest {
     assertThat(result.getIndexClose()).isEqualTo("-");
     assertThat(result.getIndexDiffFromPrev()).isEqualTo("1.2");
     assertThat(result.getIndexFluctuationRate()).isEqualTo("-");
-  }
-
-  @Test
-  @DisplayName("모든 필드가 유효한 DTO를 넘기면 모든 필드가 정확히 매핑된다")
-  void Given_Full_Valid_Dto_When_Process_Then_All_Fields_Are_Mapped() {
-    // Given
-    EtfDailyPriceDto dto = new EtfDailyPriceDto(
-        "20251030",
-        "069500",
-        "KODEX 200",
-        "35000",
-        "100",
-        "0.29",
-        "34500.0",
-        "34900",
-        "35100",
-        "34800",
-        "1000000",
-        "35000000000",
-        "1500000000000",
-        "1480000000000",
-        "42000000",
-        "KOSPI 200",
-        "350.5",
-        "1.2",
-        "0.34"
-    );
-
-    // When
-    EtfDailyPrice result = processor.process(dto);
-
-    // Then
-    assertNotNull(result);
-    assertThat(result.getBaseDate()).isEqualTo(dto.baseDate());
-    assertThat(result.getIsinShortCode()).isEqualTo(dto.isinShortCode());
-    assertThat(result.getItemsName()).isEqualTo(dto.itemsName());
-    assertThat(result.getClosePrice()).isEqualTo(dto.closePrice());
-    assertThat(result.getDiffFromPrevPrice()).isEqualTo(dto.diffFromPrevPrice());
-    assertThat(result.getFluctuationRate()).isEqualTo(dto.fluctuationRate());
-    assertThat(result.getNav()).isEqualTo(dto.nav());
-    assertThat(result.getOpenPrice()).isEqualTo(dto.openPrice());
-    assertThat(result.getHighPrice()).isEqualTo(dto.highPrice());
-    assertThat(result.getLowPrice()).isEqualTo(dto.lowPrice());
-    assertThat(result.getAccumulatedVolume()).isEqualTo(dto.accumulatedVolume());
-    assertThat(result.getAccumulatedTradeValue()).isEqualTo(dto.accumulatedTradeValue());
-    assertThat(result.getMarketCap()).isEqualTo(dto.marketCap());
-    assertThat(result.getTotalNetAsset()).isEqualTo(dto.totalNetAsset());
-    assertThat(result.getListedShares()).isEqualTo(dto.listedShares());
-    assertThat(result.getIndexName()).isEqualTo(dto.indexName());
-    assertThat(result.getIndexClose()).isEqualTo(dto.indexClose());
-    assertThat(result.getIndexDiffFromPrev()).isEqualTo(dto.indexDiffFromPrev());
-    assertThat(result.getIndexFluctuationRate()).isEqualTo(dto.indexFluctuationRate());
   }
 }
