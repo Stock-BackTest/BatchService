@@ -101,8 +101,7 @@ class EtfDailyPriceApiProcessorTest {
 
   @Test
   @DisplayName("빈 문자열이 포함된 DTO를 넘기면 빈 문자열이 하이픈으로 변환된다")
-  void Given_Dto_With_Empty_Strings_When_Process_Then_Empty_Strings_Convert_To_Hyphen()
-  {
+  void Given_Dto_With_Empty_Strings_When_Process_Then_Empty_Strings_Convert_To_Hyphen() {
     // Given
     EtfDailyPriceDto dto = new EtfDailyPriceDto(
         "20251030",
@@ -137,8 +136,7 @@ class EtfDailyPriceApiProcessorTest {
 
   @Test
   @DisplayName("NULL과 빈 문자열이 섞인 DTO를 넘기면 모두 하이픈으로 변환된다")
-  void Given_Dto_With_Null_And_Empty_Strings_When_Process_Then_All_Convert_To_Hyphen()
-  {
+  void Given_Dto_With_Null_And_Empty_Strings_When_Process_Then_All_Convert_To_Hyphen() {
     // Given
     EtfDailyPriceDto dto = new EtfDailyPriceDto(
         "20251030",
