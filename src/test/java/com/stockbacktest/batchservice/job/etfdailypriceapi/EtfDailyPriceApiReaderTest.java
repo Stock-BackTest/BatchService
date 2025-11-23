@@ -100,6 +100,17 @@ class EtfDailyPriceApiReaderTest {
                 .withBody((String) null)
         ).withPriority(1),
 
+        // 401 에러
+        new Expectation(
+            request()
+                .withMethod("GET")
+                .withPath(API_PATH)
+                .withQueryStringParameter("basDd", "20230101")
+        ).thenRespond(
+            response()
+                .withStatusCode(401)
+        ).withPriority(0),
+
         // 404 에러
         new Expectation(
             request()
@@ -217,6 +228,23 @@ class EtfDailyPriceApiReaderTest {
     assertThat(item.accumulatedTradeValue()).isEmpty();
     assertThat(item.totalNetAsset()).isNull();
     assertThat(item.indexClose()).isNull();
+  }
+
+  @Test
+  @DisplayName("API가 401 에러를 반환하면 RuntimeException이 throw 된다")
+  void Given_401_Error_When_Read_Then_Throw_RuntimeException() {
+    // Given
+    RestClient restClient = RestClient.builder()
+        .baseUrl("http://localhost:" + mockServerPort + API_PATH)
+        .build();
+    EtfDailyPriceApiReader reader = new EtfDailyPriceApiReader(
+        restClient,
+        LocalDate.of(2023, 1, 1)
+    );
+
+    // When & Then
+    assertThatThrownBy(reader::read)
+        .isInstanceOf(RuntimeException.class);
   }
 
   @Test
