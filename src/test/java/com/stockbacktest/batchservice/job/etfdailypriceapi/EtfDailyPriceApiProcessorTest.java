@@ -149,7 +149,7 @@ class EtfDailyPriceApiProcessorTest {
         "20251030",
         "069500",
         "KODEX 200",
-        "",  // 빈 문자열
+        "  ",  // 빈 문자열
         "",  // 빈 문자열
         "0.29",
         "34500.0",
@@ -186,7 +186,7 @@ class EtfDailyPriceApiProcessorTest {
         "069500",
         "KODEX 200",
         null,  // null
-        "",    // 빈 문자열
+        "  ",    // 빈 문자열
         "0.29",
         null,  // null
         "",    // 빈 문자열
