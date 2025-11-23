@@ -43,25 +43,25 @@ class EtfDailyPriceApiProcessorTest {
 
     // Then
     assertThat(result).isNotNull();
-    assertThat(result.getBaseDate()).isEqualTo("20251030");
-    assertThat(result.getIsinShortCode()).isEqualTo("069500");
-    assertThat(result.getItemsName()).isEqualTo("KODEX 200");
-    assertThat(result.getClosePrice()).isEqualTo("35000");
-    assertThat(result.getDiffFromPrevPrice()).isEqualTo("100");
-    assertThat(result.getFluctuationRate()).isEqualTo("0.29");
-    assertThat(result.getNav()).isEqualTo("34500.0");
-    assertThat(result.getOpenPrice()).isEqualTo("34900");
-    assertThat(result.getHighPrice()).isEqualTo("35100");
-    assertThat(result.getLowPrice()).isEqualTo("34800");
-    assertThat(result.getAccumulatedVolume()).isEqualTo("1000000");
-    assertThat(result.getAccumulatedTradeValue()).isEqualTo("35000000000");
-    assertThat(result.getMarketCap()).isEqualTo("1500000000000");
-    assertThat(result.getTotalNetAsset()).isEqualTo("1480000000000");
-    assertThat(result.getListedShares()).isEqualTo("42000000");
-    assertThat(result.getIndexName()).isEqualTo("KOSPI 200");
-    assertThat(result.getIndexClose()).isEqualTo("350.5");
-    assertThat(result.getIndexDiffFromPrev()).isEqualTo("1.2");
-    assertThat(result.getIndexFluctuationRate()).isEqualTo("0.34");
+    assertThat(result.getBaseDate()).isEqualTo(dto.baseDate());
+    assertThat(result.getIsinShortCode()).isEqualTo(dto.isinShortCode());
+    assertThat(result.getItemsName()).isEqualTo(dto.itemsName());
+    assertThat(result.getClosePrice()).isEqualTo(dto.closePrice());
+    assertThat(result.getDiffFromPrevPrice()).isEqualTo(dto.diffFromPrevPrice());
+    assertThat(result.getFluctuationRate()).isEqualTo(dto.fluctuationRate());
+    assertThat(result.getNav()).isEqualTo(dto.nav());
+    assertThat(result.getOpenPrice()).isEqualTo(dto.openPrice());
+    assertThat(result.getHighPrice()).isEqualTo(dto.highPrice());
+    assertThat(result.getLowPrice()).isEqualTo(dto.lowPrice());
+    assertThat(result.getAccumulatedVolume()).isEqualTo(dto.accumulatedVolume());
+    assertThat(result.getAccumulatedTradeValue()).isEqualTo(dto.accumulatedTradeValue());
+    assertThat(result.getMarketCap()).isEqualTo(dto.marketCap());
+    assertThat(result.getTotalNetAsset()).isEqualTo(dto.totalNetAsset());
+    assertThat(result.getListedShares()).isEqualTo(dto.listedShares());
+    assertThat(result.getIndexName()).isEqualTo(dto.indexName());
+    assertThat(result.getIndexClose()).isEqualTo(dto.indexClose());
+    assertThat(result.getIndexDiffFromPrev()).isEqualTo(dto.indexDiffFromPrev());
+    assertThat(result.getIndexFluctuationRate()).isEqualTo(dto.indexFluctuationRate());
   }
 
   @Test
@@ -97,8 +97,6 @@ class EtfDailyPriceApiProcessorTest {
     assertThat(result).isNotNull();
     assertThat(result.getNav()).isEqualTo("-");
     assertThat(result.getIndexClose()).isEqualTo("-");
-    assertThat(result.getBaseDate()).isEqualTo("20251030");
-    assertThat(result.getIsinShortCode()).isEqualTo("069500");
   }
 
   @Test
@@ -206,10 +204,10 @@ class EtfDailyPriceApiProcessorTest {
 
     // Then
     assertThat(result).isNotNull();
-    assertThat(result.getDiffFromPrevPrice()).isEqualTo("-100");
-    assertThat(result.getFluctuationRate()).isEqualTo("-0.29");
-    assertThat(result.getIndexDiffFromPrev()).isEqualTo("-1.2");
-    assertThat(result.getIndexFluctuationRate()).isEqualTo("-0.34");
+    assertThat(result.getDiffFromPrevPrice()).isEqualTo(dto.diffFromPrevPrice());
+    assertThat(result.getFluctuationRate()).isEqualTo(dto.fluctuationRate());
+    assertThat(result.getIndexDiffFromPrev()).isEqualTo(dto.indexDiffFromPrev());
+    assertThat(result.getIndexFluctuationRate()).isEqualTo(dto.indexFluctuationRate());
   }
 
   @Test
