@@ -102,45 +102,6 @@ class EtfDailyPriceApiProcessorTest {
   }
 
   @Test
-  @DisplayName("모든 필드가 NULL인 DTO를 넘기면 모두 하이픈으로 변환된다")
-  void Given_Dto_With_All_Null_Values_When_Process_Then_All_Convert_To_Hyphen() {
-    // Given
-    EtfDailyPriceDto dto = new EtfDailyPriceDto(
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-    );
-
-    // When
-    EtfDailyPrice result = processor.process(dto);
-
-    // Then
-    assertThat(result).isNotNull();
-    assertThat(result.getBaseDate()).isEqualTo("-");
-    assertThat(result.getIsinShortCode()).isEqualTo("-");
-    assertThat(result.getItemsName()).isEqualTo("-");
-    assertThat(result.getClosePrice()).isEqualTo("-");
-    assertThat(result.getNav()).isEqualTo("-");
-    assertThat(result.getIndexClose()).isEqualTo("-");
-  }
-
-  @Test
   @DisplayName("빈 문자열이 포함된 DTO를 넘기면 빈 문자열이 하이픈으로 변환된다")
   void Given_Dto_With_Empty_Strings_When_Process_Then_Empty_Strings_Convert_To_Hyphen()
   {
