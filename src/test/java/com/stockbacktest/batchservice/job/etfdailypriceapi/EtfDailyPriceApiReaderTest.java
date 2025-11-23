@@ -136,24 +136,23 @@ class EtfDailyPriceApiReaderTest {
         LocalDate.of(2025, 10, 30)
     );
 
+    // 기대하는 데이터 정의
+    String[][] expectedData = {
+        {"069500", "KODEX 200"},
+        {"069660", "KODEX 레버리지"},
+        {"114800", "KODEX 인버스"}
+    };
+
     // When & Then
-    EtfDailyPriceDto item1 = reader.read();
-    assertThat(item1).isNotNull();
-    assertThat(item1.isinShortCode()).isEqualTo("069500");
-    assertThat(item1.itemsName()).isEqualTo("KODEX 200");
+    for (String[] expected : expectedData) {
+      EtfDailyPriceDto item = reader.read();
+      assertThat(item).isNotNull();
+      assertThat(item.isinShortCode()).isEqualTo(expected[0]);
+      assertThat(item.itemsName()).isEqualTo(expected[1]);
+    }
 
-    EtfDailyPriceDto item2 = reader.read();
-    assertThat(item2).isNotNull();
-    assertThat(item2.isinShortCode()).isEqualTo("069660");
-    assertThat(item2.itemsName()).isEqualTo("KODEX 레버리지");
-
-    EtfDailyPriceDto item3 = reader.read();
-    assertThat(item3).isNotNull();
-    assertThat(item3.isinShortCode()).isEqualTo("114800");
-    assertThat(item3.itemsName()).isEqualTo("KODEX 인버스");
-
-    EtfDailyPriceDto item4 = reader.read();
-    assertThat(item4).isNull(); // 더 이상 데이터 없음
+    // 더 이상 데이터 없음 확인
+    assertThat(reader.read()).isNull();
   }
 
   @Test
