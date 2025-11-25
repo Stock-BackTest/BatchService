@@ -1,0 +1,254 @@
+package com.stockbacktest.batchservice.job.etfdailypriceapi;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+
+import com.stockbacktest.batchservice.dto.EtfDailyPriceDto;
+import com.stockbacktest.batchservice.job.etfdailypriceapi.domain.entity.EtfDailyPrice;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+
+class EtfDailyPriceApiProcessorTest {
+
+  private final EtfDailyPriceApiProcessor processor = new EtfDailyPriceApiProcessor();
+
+  @Test
+  @DisplayName("유효한 DTO를 넘기면 Entity로 정상 변환된다")
+  void Given_Valid_Dto_When_Process_Then_Returns_Entity() {
+    // Given
+    EtfDailyPriceDto dto = new EtfDailyPriceDto(
+        "20251030",
+        "069500",
+        "KODEX 200",
+        "35000",
+        "100",
+        "0.29",
+        "34500.0",
+        "34900",
+        "35100",
+        "34800",
+        "1000000",
+        "35000000000",
+        "1500000000000",
+        "1480000000000",
+        "42000000",
+        "KOSPI 200",
+        "350.5",
+        "1.2",
+        "0.34"
+    );
+
+    // When
+    EtfDailyPrice result = processor.process(dto);
+
+    // Then
+    assertThat(result).isNotNull();
+    assertThat(result.getBaseDate()).isEqualTo(dto.baseDate());
+    assertThat(result.getIsinShortCode()).isEqualTo(dto.isinShortCode());
+    assertThat(result.getItemsName()).isEqualTo(dto.itemsName());
+    assertThat(result.getClosePrice()).isEqualTo(dto.closePrice());
+    assertThat(result.getDiffFromPrevPrice()).isEqualTo(dto.diffFromPrevPrice());
+    assertThat(result.getFluctuationRate()).isEqualTo(dto.fluctuationRate());
+    assertThat(result.getNav()).isEqualTo(dto.nav());
+    assertThat(result.getOpenPrice()).isEqualTo(dto.openPrice());
+    assertThat(result.getHighPrice()).isEqualTo(dto.highPrice());
+    assertThat(result.getLowPrice()).isEqualTo(dto.lowPrice());
+    assertThat(result.getAccumulatedVolume()).isEqualTo(dto.accumulatedVolume());
+    assertThat(result.getAccumulatedTradeValue()).isEqualTo(dto.accumulatedTradeValue());
+    assertThat(result.getMarketCap()).isEqualTo(dto.marketCap());
+    assertThat(result.getTotalNetAsset()).isEqualTo(dto.totalNetAsset());
+    assertThat(result.getListedShares()).isEqualTo(dto.listedShares());
+    assertThat(result.getIndexName()).isEqualTo(dto.indexName());
+    assertThat(result.getIndexClose()).isEqualTo(dto.indexClose());
+    assertThat(result.getIndexDiffFromPrev()).isEqualTo(dto.indexDiffFromPrev());
+    assertThat(result.getIndexFluctuationRate()).isEqualTo(dto.indexFluctuationRate());
+  }
+
+  @Test
+  @DisplayName("NULL 값이 포함된 DTO를 넘기면 NULL이 하이픈으로 변환된다")
+  void Given_Dto_With_Null_Values_When_Process_Then_Null_Converts_To_Hyphen() {
+    // Given
+    EtfDailyPriceDto dto = new EtfDailyPriceDto(
+        "20251030",
+        "069500",
+        "KODEX 200",
+        "35000",
+        "100",
+        "0.29",
+        null,  // NAV가 null
+        "34900",
+        "35100",
+        "34800",
+        "1000000",
+        "35000000000",
+        "1500000000000",
+        "1480000000000",
+        "42000000",
+        "KOSPI 200",
+        null,  // indexClose가 null
+        "1.2",
+        "0.34"
+    );
+
+    // When
+    EtfDailyPrice result = processor.process(dto);
+
+    // Then
+    assertThat(result).isNotNull();
+    assertThat(result.getNav()).isEqualTo("-");
+    assertThat(result.getIndexClose()).isEqualTo("-");
+  }
+
+  @Test
+  @DisplayName("빈 문자열이 포함된 DTO를 넘기면 빈 문자열이 하이픈으로 변환된다")
+  void Given_Dto_With_Empty_Strings_When_Process_Then_Empty_Strings_Convert_To_Hyphen() {
+    // Given
+    EtfDailyPriceDto dto = new EtfDailyPriceDto(
+        "20251030",
+        "069500",
+        "KODEX 200",
+        "  ",  // 빈 문자열
+        "",  // 빈 문자열
+        "0.29",
+        "34500.0",
+        "34900",
+        "35100",
+        "34800",
+        "1000000",
+        "35000000000",
+        "1500000000000",
+        "1480000000000",
+        "42000000",
+        "KOSPI 200",
+        "350.5",
+        "1.2",
+        "0.34"
+    );
+
+    // When
+    EtfDailyPrice result = processor.process(dto);
+
+    // Then
+    assertThat(result).isNotNull();
+    assertThat(result.getClosePrice()).isEqualTo("-");
+    assertThat(result.getDiffFromPrevPrice()).isEqualTo("-");
+  }
+
+  @Test
+  @DisplayName("NULL과 빈 문자열이 섞인 DTO를 넘기면 모두 하이픈으로 변환된다")
+  void Given_Dto_With_Null_And_Empty_Strings_When_Process_Then_All_Convert_To_Hyphen() {
+    // Given
+    EtfDailyPriceDto dto = new EtfDailyPriceDto(
+        "20251030",
+        "069500",
+        "KODEX 200",
+        null,  // null
+        "  ",    // 빈 문자열
+        "0.29",
+        null,  // null
+        "",    // 빈 문자열
+        "35100",
+        "34800",
+        "1000000",
+        "35000000000",
+        "1500000000000",
+        "1480000000000",
+        "42000000",
+        "KOSPI 200",
+        "350.5",
+        "1.2",
+        "0.34"
+    );
+
+    // When
+    EtfDailyPrice result = processor.process(dto);
+
+    // Then
+    assertThat(result).isNotNull();
+    assertThat(result.getClosePrice()).isEqualTo("-");
+    assertThat(result.getDiffFromPrevPrice()).isEqualTo("-");
+    assertThat(result.getNav()).isEqualTo("-");
+    assertThat(result.getOpenPrice()).isEqualTo("-");
+  }
+
+  @Test
+  @DisplayName("음수 문자열이 포함된 DTO를 넘기면 음수가 그대로 유지된다")
+  void Given_Dto_With_Negative_Values_When_Process_Then_Negative_Values_Remain() {
+    // Given
+    EtfDailyPriceDto dto = new EtfDailyPriceDto(
+        "20251030",
+        "069500",
+        "KODEX 200",
+        "35000",
+        "-100",  // 음수
+        "-0.29",  // 음수
+        "34500.0",
+        "34900",
+        "35100",
+        "34800",
+        "1000000",
+        "35000000000",
+        "1500000000000",
+        "1480000000000",
+        "42000000",
+        "KOSPI 200",
+        "350.5",
+        "-1.2",  // 음수
+        "-0.34"  // 음수
+    );
+
+    // When
+    EtfDailyPrice result = processor.process(dto);
+
+    // Then
+    assertThat(result).isNotNull();
+    assertThat(result.getDiffFromPrevPrice()).isEqualTo(dto.diffFromPrevPrice());
+    assertThat(result.getFluctuationRate()).isEqualTo(dto.fluctuationRate());
+    assertThat(result.getIndexDiffFromPrev()).isEqualTo(dto.indexDiffFromPrev());
+    assertThat(result.getIndexFluctuationRate()).isEqualTo(dto.indexFluctuationRate());
+  }
+
+  @Test
+  @DisplayName("NULL인 DTO를 넘기면 NullPointerException이 throw 된다")
+  void Given_Null_Dto_When_Process_Then_Throw_NullPointerException() {
+    // Given & When & Then
+    assertThatThrownBy(() -> processor.process(null))
+        .isInstanceOf(NullPointerException.class);
+  }
+
+  @Test
+  @DisplayName("하이픈 문자열이 포함된 DTO를 넘기면 하이픈이 그대로 유지된다")
+  void Given_Dto_With_Hyphen_String_When_Process_Then_Hyphen_Remains() {
+    // Given
+    EtfDailyPriceDto dto = new EtfDailyPriceDto(
+        "20251030",
+        "069500",
+        "KODEX 200",
+        "35000",
+        "100",
+        "-",  // 하이픈 문자열
+        "-",  // 하이픈 문자열
+        "34900",
+        "35100",
+        "34800",
+        "1000000",
+        "35000000000",
+        "1500000000000",
+        "1480000000000",
+        "42000000",
+        "KOSPI 200",
+        "-",  // 하이픈 문자열
+        "1.2",
+        "0.34"
+    );
+
+    // When
+    EtfDailyPrice result = processor.process(dto);
+
+    // Then
+    assertThat(result).isNotNull();
+    assertThat(result.getFluctuationRate()).isEqualTo("-");
+    assertThat(result.getNav()).isEqualTo("-");
+    assertThat(result.getIndexClose()).isEqualTo("-");
+  }
+}

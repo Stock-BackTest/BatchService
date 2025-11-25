@@ -1,0 +1,25 @@
+{
+  "OutBlock_1": [
+    {
+      "BAS_DD": "20251030",
+      "ISU_CD": "069500",
+      "ISU_NM": "KODEX 200",
+      "TDD_CLSPRC": "35000",
+      "CMPPREVDD_PRC": "",
+      "FLUC_RT": "-",
+      "NAV": null,
+      "TDD_OPNPRC": "34900",
+      "TDD_HGPRC": "35100",
+      "TDD_LWPRC": "34800",
+      "ACC_TRDVOL": "1000000",
+      "ACC_TRDVAL": "",
+      "MKTCAP": "1500000000000",
+      "INVSTASST_NETASST_TOTAMT": null,
+      "LIST_SHRS": "42000000",
+      "IDX_IND_NM": "KOSPI 200",
+      "OBJ_STKPRC_IDX": null,
+      "CMPPREVDD_IDX": "-",
+      "FLUC_RT_IDX": ""
+    }
+  ]
+}
