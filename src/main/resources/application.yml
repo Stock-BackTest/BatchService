@@ -13,6 +13,12 @@ spring:
   batch:
     jdbc:
       initialize-schema: always
+    job:
+      enabled: false
+
+  task:
+    scheduling:
+      thread-name-prefix: batch-scheduler
 
 mybatis:
   mapper-locations: classpath*:mapper/**/*.xml
