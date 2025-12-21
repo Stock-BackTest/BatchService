@@ -4,12 +4,14 @@ import com.stockbacktest.batchservice.dto.EtfDailyPriceDto;
 import com.stockbacktest.batchservice.job.etfdailypriceapi.domain.entity.EtfDailyPrice;
 import com.stockbacktest.batchservice.job.etfdailypriceapi.domain.mapper.EtfDailyPriceMapper;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.StepScope;
 import org.springframework.batch.core.job.builder.JobBuilder;
 import org.springframework.batch.core.repository.JobRepository;
 import org.springframework.batch.core.step.builder.StepBuilder;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.transaction.PlatformTransactionManager;
@@ -22,9 +24,11 @@ public class EtfDailyPriceApiJobConfig {
   @Bean
   @StepScope
   public EtfDailyPriceApiReader etfDailyPriceApiReader(
-      RestClient restClient
+      RestClient restClient,
+      @Value("#{jobParameters['targetDate']}") String targetDate
   ) {
-    return new EtfDailyPriceApiReader(restClient, LocalDate.now());
+    LocalDate date = LocalDate.parse(targetDate, DateTimeFormatter.ofPattern("yyyyMMdd"));
+    return new EtfDailyPriceApiReader(restClient, date);
   }
 
   // Processor Bean

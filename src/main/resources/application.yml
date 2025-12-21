@@ -13,6 +13,12 @@ spring:
   batch:
     jdbc:
       initialize-schema: always
+    job:
+      enabled: false
+
+  task:
+    scheduling:
+      thread-name-prefix: batch-scheduler
 
 mybatis:
   mapper-locations: classpath*:mapper/**/*.xml
@@ -26,4 +32,4 @@ jasypt:
 
 krx:
   apiUrl: https://data-dbg.krx.co.kr/svc/apis/etp/etf_bydd_trd
-  apikey: ENC(QBd0Ut8OGvI/sH7b8Br0CejdiVXpXf1zolZC1unFB6acjcu4ldOun15nJjCwwDlVFSPoWtevLIig3P246cemqI/OCaMVYPChRWByThB2hbY=)
+  apikey: ENC(RJfTdf9ATiEct5Q2T1tT2tRr55DvD3WSR/EnI0xhvVNKq1jkzGPuxULKRjzN3S9wu/TyqHHS8tydXejPRpeGQhwr6ZeV4Pi5NwH3bpaHWZ8=)

@@ -28,7 +28,7 @@ public class RestClientConfig {
         .requestFactory(requestFactory())
         .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
         .defaultHeader(AUTH_KEY, apiKey)
-        .defaultStatusHandler(
+        .defaultStatusHandler(//FIXME 추후 CustomException으로 변경 필요.
             HttpStatusCode::isError, (request, response) -> {
               if(response.getStatusCode().is4xxClientError()) throw new RuntimeException("4xx Client Error");
               if(response.getStatusCode().is5xxServerError()) throw new RuntimeException("5xx Server Error");
