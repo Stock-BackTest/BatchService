@@ -51,7 +51,8 @@
     </foreach>
   </insert>
 
-  <select id="findByBaseDate" resultType="EtfDailyPrice">
+  <select id="findByBaseDate"
+    resultType="com.stockbacktest.batchservice.job.etfdailypriceapi.domain.entity.EtfDailyPrice">
     SELECT *
     FROM etf_daily_price
     WHERE base_date = #{date}

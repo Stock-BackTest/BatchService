@@ -3,16 +3,17 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper
   namespace="com.stockbacktest.batchservice.job.transformetfdailyprice.domain.mapper.SecuritiesProductsInfoMapper">
-  <select id="findByIsinShrtCd" parameterType="string" resultType="SecuritiesProductsInfo">
+  <select id="findByIsinShrtCd" parameterType="string"
+    resultType="com.stockbacktest.batchservice.job.transformetfdailyprice.domain.entity.SecuritiesProductsInfo">
     SELECT
-      isinCd,
-      isinShrtCd,
-      securityName,
-      assetCd,
-      listingDate,
-      delistingDate,
-      createdAt,
-      modifiedAt
+    isinCd,
+    isinShrtCd,
+    securityName,
+    assetCd,
+    listingDate,
+    delistingDate,
+    createdAt,
+    modifiedAt
     FROM securities_products_info
     WHERE isin_shrt_cd = #{isinShrtCd}
   </select>
