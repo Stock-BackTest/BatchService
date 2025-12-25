@@ -9,7 +9,7 @@ import lombok.Getter;
 @Getter
 @Builder
 @AllArgsConstructor
-public class ProductsDistributionInfo { // 배당금, 분배금
+public class ProductsDistributionInfo {
 
   private String isinCd;
   private LocalDate recordDate;

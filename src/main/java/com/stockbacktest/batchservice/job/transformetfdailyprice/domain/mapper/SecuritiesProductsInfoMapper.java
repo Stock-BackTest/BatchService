@@ -7,5 +7,6 @@ import org.apache.ibatis.annotations.Param;
 
 @Mapper
 public interface SecuritiesProductsInfoMapper {
+
   Optional<SecuritiesProductsInfo> findByIsinShrtCd(@Param("isinShrtCd") String isinShrtCd);
 }

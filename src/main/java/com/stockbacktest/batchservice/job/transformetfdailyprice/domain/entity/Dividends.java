@@ -9,6 +9,7 @@ import lombok.Getter;
 @Builder
 @Getter
 public class Dividends {
+
   private String isinCd;
   private LocalDate baseDate;
   private LocalDate actualPayDate;
