@@ -1,0 +1,19 @@
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+  namespace="com.stockbacktest.batchservice.job.transformetfdailyprice.domain.mapper.DividendsMapper">
+  <select id="findByIsinCd" resultType="Dividends" parameterType="string">
+    SELECT
+      isin,
+      base_date,
+      actual_pay_date,
+      div_type,
+      dist_per_share,
+      tax_std,
+      estm_std_prc
+    FROM dividends
+    WHERE isin = #{isinCd}
+    AND base_date = #{baseDate}
+  </select>
+</mapper>
